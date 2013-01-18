@@ -82,7 +82,10 @@ public class ITKernelAPI
         long labelId = statement.getOrCreateLabelId( "labello" );
         statement.addLabelToNode( labelId, node.getId() );
 
-        // 4: Commit through the beans API
+        // 4: Close the statement context
+        statement.close();
+
+        // 5: Commit through the beans API
         beansAPITx.success();
         beansAPITx.finish();
 
@@ -118,6 +121,7 @@ public class ITKernelAPI
         Node node = db.createNode();
         long labelId = statement.getOrCreateLabelId( "labello" );
         statement.addLabelToNode( labelId, node.getId() );
+        statement.close();
         tx.success();
         tx.finish();
         outerTx.finish();
@@ -140,6 +144,7 @@ public class ITKernelAPI
         Node node = db.createNode();
         long labelId = statement.getOrCreateLabelId( "labello" );
         statement.addLabelToNode( labelId, node.getId() );
+        statement.close();
         tx.finish();
 
         // THEN
@@ -160,6 +165,7 @@ public class ITKernelAPI
         Node node = db.createNode();
         long labelId = statement.getOrCreateLabelId( "labello" );
         statement.addLabelToNode( labelId, node.getId() );
+        statement.close();
         tx.failure();
         tx.success();
         tx.finish();
